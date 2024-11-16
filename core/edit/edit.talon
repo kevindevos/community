@@ -1,3 +1,10 @@
+scratch: key('backspace')
+drill: key('delete')
+scrape: key('escape')
+void: key('space')
+page down: key('pagedown')
+page up: key('pageup')
+
 # Compound of action(select, clear, copy, cut, paste, etc.) and modifier(word, line, etc.) commands for editing text.
 # eg: "select line", "clear all"
 <user.edit_action> <user.edit_modifier>: user.edit_command(edit_action, edit_modifier)
