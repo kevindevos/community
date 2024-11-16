@@ -12,8 +12,8 @@ window reload: user.vscode("workbench.action.reloadWindow")
 window close: user.vscode("workbench.action.closeWindow")
 #multiple_cursor.py support end
 
-go view [<user.text>]:
-    user.vscode("workbench.action.openView")
+please [<user.text>]:
+    user.vscode("workbench.action.showCommands")
     insert(user.text or "")
 
 # Sidebar
@@ -36,6 +36,12 @@ symbol hunt all [<user.text>]:
     user.vscode("workbench.action.showAllSymbols")
     sleep(50ms)
     insert(text or "")
+
+disk ugly: user.vscode("workbench.action.files.saveWithoutFormatting")
+disk:
+    edit.save()
+    sleep(150ms)
+    user.vscode("hideSuggestWidget")
 
 # Panels
 panel control: user.vscode("workbench.panel.repl.view.focus")
@@ -76,6 +82,10 @@ file hunt (pace | paste):
     user.vscode("workbench.action.quickOpen")
     sleep(50ms)
     edit.paste()
+items [<user.text>]:
+    user.vscode("workbench.action.quickOpen")
+    sleep(50ms)
+    insert(text or "")
 file copy name: user.vscode("fileutils.copyFileName")
 file copy path: user.vscode("copyFilePath")
 file copy local [path]: user.vscode("copyRelativeFilePath")
@@ -97,6 +107,17 @@ file delete:
     sleep(150ms)
 file open folder: user.vscode("revealFileInOS")
 file reveal: user.vscode("workbench.files.action.showActiveFileInExplorer")
+
+recent [<phrase>]$:
+    user.vscode("workbench.action.showAllEditorsByMostRecentlyUsed")
+    sleep(300ms)
+    user.parse_phrase(phrase or "")
+
+buffers [<phrase>]$:
+    user.vscode("workbench.action.showAllEditorsByMostRecentlyUsed")
+    sleep(300ms)
+    user.parse_phrase(phrase or "")
+
 save ugly: user.vscode("workbench.action.files.saveWithoutFormatting")
 
 # Language Features
@@ -245,9 +266,10 @@ terminal scroll up: user.vscode("workbench.action.terminal.scrollUp")
 terminal scroll down: user.vscode("workbench.action.terminal.scrollDown")
 terminal <number_small>: user.vscode_terminal(number_small)
 
-task run [<user.text>]:
-    user.vscode("workbench.action.tasks.runTask")
-    insert(user.text or "")
+# Custom Terminal commands
+term lisa: insert("ls")
+term katie: insert("cd")
+
 #TODO: should this be added to linecommands?
 copy line down: user.vscode("editor.action.copyLinesDownAction")
 copy line up: user.vscode("editor.action.copyLinesUpAction")
@@ -288,3 +310,6 @@ cell run: user.vscode("notebook.cell.execute")
 
 install local: user.vscode("workbench.extensions.action.installVSIX")
 preview markdown: user.vscode("markdown.showPreview")
+
+# Translation extension
+translate this: user.vscode("extension.translateTextPreferred")
