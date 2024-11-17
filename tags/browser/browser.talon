@@ -1,6 +1,6 @@
 tag: browser
 -
-tag(): user.navigation
+tag(): user.naviga,tion
 
 address bar | go address | go url: browser.focus_address()
 go page | page focus: browser.focus_page()
@@ -9,8 +9,8 @@ address copy | url copy | copy address | copy url:
     sleep(50ms)
     edit.copy()
 go home: browser.go_home()
-[go] forward: browser.go_forward()
-go (back | backward): browser.go_back()
+[go] forward: key("cmd-]")
+go (back | backward): key("cmd-[")
 go to {user.website}: browser.go(website)
 go private: browser.open_private_window()
 
